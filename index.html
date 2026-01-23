@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Finance • Easy Money Tracking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .logo-text {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            color: var(--gray);
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* WhatsApp Section */
+        .whatsapp-section {
+            background: white;
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            border-left: 6px solid #25d366;
+        }
+
+        .whatsapp-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .whatsapp-header i {
+            color: #25d366;
+            font-size: 28px;
+        }
+
+        .whatsapp-header h2 {
+            color: var(--dark);
+            font-size: 22px;
+        }
+
+        .whatsapp-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .whatsapp-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 16px;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .whatsapp-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .whatsapp-form button {
+            padding: 16px 32px;
+            background: #25d366;
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .whatsapp-form button:hover {
+            background: #1da851;
+            transform: translateY(-2px);
+        }
+
+        .whatsapp-note {
+            color: var(--gray);
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        /* Auto Save Indicator */
+        .save-indicator {
+            background: var(--light);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+            border: 2px solid var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .save-indicator i {
+            color: var(--secondary);
+            font-size: 20px;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .stat-title {
+            font-size: 16px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .income .stat-icon {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--secondary);
+        }
+
+        .expenses .stat-icon {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        .balance .stat-icon {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .stat-trend {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .positive {
+            color: var(--secondary);
+        }
+
+        .negative {
+            color: var(--danger);
+        }
+
+        /* Main Content */
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+
+        .section {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .section-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h2 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .add-btn {
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .add-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Forms */
+        .form-container {
+            padding: 24px;
+            border-bottom: 1px solid var(--gray-light);
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 16px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: var(--gray-light);
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background: #d1d9e6;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 16px;
+            font-weight: 600;
+            color: var(--gray);
+            border-bottom: 2px solid var(--gray-light);
+            background: var(--light);
+        }
+
+        .data-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover {
+            background: var(--light);
+        }
+
+        .category-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            background: var(--gray-light);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-btn:hover {
+            background: var(--gray-light);
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .control-btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .btn-save {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-save:hover {
+            background: #0ea271;
+        }
+
+        .btn-reset {
+            background: var(--warning);
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #d97706;
+        }
+
+        .btn-export {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-export:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 0;
+            margin-top: 40px;
+            color: var(--gray);
+            font-size: 14px;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .whatsapp-form {
+                flex-direction: column;
+            }
+            
+            .whatsapp-form input,
+            .whatsapp-form button {
+                width: 100%;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .control-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Empty States */
+        .empty-state {
+            text-align: center;
+            padding: 48px 24px;
+            color: var(--gray);
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            color: var(--gray-light);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        /* Auto-save animation */
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .saving {
+            animation: pulse 1s infinite;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .quick-action-btn {
+            padding: 10px 20px;
+            background: var(--light);
+            border: 1px solid var(--gray-light);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .quick-action-btn:hover {
+            background: white;
+            border-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <div class="logo-text">Family Finance</div>
+            </div>
+            <p class="tagline">Track money easily • Share instantly • Save automatically</p>
+            
+            <div class="quick-actions">
+                <button class="quick-action-btn" onclick="addQuickExpense('Groceries', 50)">
+                    <i class="fas fa-shopping-cart"></i> Groceries
+                </button>
+                <button class="quick-action-btn" onclick="addQuickExpense('Transport', 20)">
+                    <i class="fas fa-car"></i> Transport
+                </button>
+                <button class="quick-action-btn" onclick="addQuickExpense('Dining', 30)">
+                    <i class="fas fa-utensils"></i> Dining
+                </button>
+                <button class="quick-action-btn" onclick="addQuickExpense('Entertainment', 25)">
+                    <i class="fas fa-film"></i> Entertainment
+                </button>
+            </div>
+        </header>
+
+        <!-- WhatsApp Sharing -->
+        <section class="whatsapp-section">
+            <div class="whatsapp-header">
+                <i class="fab fa-whatsapp"></i>
+                <h2>Share with Family</h2>
+            </div>
+            <div class="whatsapp-form">
+                <input type="text" id="whatsappNumber" placeholder="+230 59237053" value="+230">
+                <button onclick="sendDailyUpdate()">
+                    <i class="fab fa-whatsapp"></i> Send Daily Update
+                </button>
+            </div>
+            <p class="whatsapp-note">
+                Perfect for sharing expenses between spouses! Enter the WhatsApp number and click to share today's expenses.
+            </p>
+        </section>
+
+        <!-- Auto Save Indicator -->
+        <div class="save-indicator" id="saveIndicator">
+            <i class="fas fa-save"></i>
+            <span>Auto-saving all changes...</span>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="dashboard">
+            <div class="stat-card income">
+                <div class="stat-header">
+                    <div class="stat-title">Money In</div>
+                    <div class="stat-icon">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                </div>
+                <div class="stat-value" id="totalIncome">$0.00</div>
+                <div class="stat-trend positive">Last 30 days</div>
+            </div>
+            
+            <div class="stat-card expenses">
+                <div class="stat-header">
+                    <div class="stat-title">Money Out</div>
+                    <div class="stat-icon">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                </div>
+                <div class="stat-value" id="totalExpenses">$0.00</div>
+                <div class="stat-trend">Tracked spending</div>
+            </div>
+            
+            <div class="stat-card balance">
+                <div class="stat-header">
+                    <div class="stat-title">Balance</div>
+                    <div class="stat-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                </div>
+                <div class="stat-value" id="netBalance">$0.00</div>
+                <div class="stat-trend positive">Available</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Income Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>Income</h2>
+                    <button class="add-btn" onclick="toggleIncomeForm()">
+                        <i class="fas fa-plus"></i> Add Income
+                    </button>
+                </div>
+                
+                <div class="form-container" id="incomeForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="incomeDate">Date</label>
+                            <input type="date" id="incomeDate" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="incomeCategory">Category</label>
+                            <select id="incomeCategory" class="form-control">
+                                <option value="Salary">Salary</option>
+                                <option value="Freelance">Freelance</option>
+                                <option value="Business">Business</option>
+                                <option value="Investment">Investment</option>
+                                <option value="Gift">Gift</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="incomeDescription">Description</label>
+                        <input type="text" id="incomeDescription" class="form-control" 
+                               placeholder="What's this money for?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="incomeAmount">Amount ($)</label>
+                        <input type="number" id="incomeAmount" class="form-control" 
+                               min="0" step="0.01" placeholder="0.00" required>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" onclick="saveIncome()">
+                            <i class="fas fa-check"></i> Save
+                        </button>
+                        <button class="btn btn-secondary" onclick="toggleIncomeForm()">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table" id="incomeTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="incomeTableBody">
+                            <!-- Income data will be inserted here -->
+                        </tbody>
+                    </table>
+                    <div class="empty-state" id="incomeEmptyState" style="display: none;">
+                        <i class="fas fa-coins"></i>
+                        <h3>No Income Yet</h3>
+                        <p>Add your first income entry to get started</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Expenses Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>Expenses</h2>
+                    <button class="add-btn" onclick="toggleExpenseForm()">
+                        <i class="fas fa-plus"></i> Add Expense
+                    </button>
+                </div>
+                
+                <div class="form-container" id="expenseForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expenseDate">Date</label>
+                            <input type="date" id="expenseDate" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseCategory">Category</label>
+                            <select id="expenseCategory" class="form-control">
+                                <option value="Groceries">Groceries</option>
+                                <option value="Transport">Transport</option>
+                                <option value="Bills">Bills</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Health">Health</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseDescription">Description</label>
+                        <input type="text" id="expenseDescription" class="form-control" 
+                               placeholder="What did you spend on?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseAmount">Amount ($)</label>
+                        <input type="number" id="expenseAmount" class="form-control" 
+                               min="0" step="0.01" placeholder="0.00" required>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" onclick="saveExpense()">
+                            <i class="fas fa-check"></i> Save
+                        </button>
+                        <button class="btn btn-secondary" onclick="toggleExpenseForm()">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table" id="expenseTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenseTableBody">
+                            <!-- Expense data will be inserted here -->
+                        </tbody>
+                    </table>
+                    <div class="empty-state" id="expenseEmptyState" style="display: none;">
+                        <i class="fas fa-receipt"></i>
+                        <h3>No Expenses Yet</h3>
+                        <p>Add your first expense to start tracking</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="controls">
+            <button class="control-btn btn-save" onclick="manualSave()">
+                <i class="fas fa-save"></i> Save Now
+            </button>
+            <button class="control-btn btn-reset" onclick="startNewCycle()">
+                <i class="fas fa-redo"></i> New 30-Day Cycle
+            </button>
+            <button class="control-btn btn-export" onclick="exportData()">
+                <i class="fas fa-download"></i> Export Data
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Family Finance Tracker • All data is automatically saved in your browser</p>
+            <p style="margin-top: 8px; font-size: 13px;">
+                No login required • No password needed • Works offline
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Application State
+        const AppState = {
+            income: [],
+            expenses: [],
+            editingId: null,
+            editingType: null,
+            whatsappNumber: '+230',
+            autoSaveInterval: null,
+            lastSaveTime: null
+        };
+
+        // DOM Elements
+        const saveIndicator = document.getElementById('saveIndicator');
+        const whatsappNumberInput = document.getElementById('whatsappNumber');
+
+        // Initialize Application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            setupAutoSave();
+            loadData();
+            updateDashboard();
+        });
+
+        // Initialize App
+        function initializeApp() {
+            // Set today's date in forms
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('incomeDate').value = today;
+            document.getElementById('expenseDate').value = today;
+
+            // Load saved WhatsApp number
+            const savedNumber = localStorage.getItem('family_finance_whatsapp');
+            if (savedNumber) {
+                AppState.whatsappNumber = savedNumber;
+                whatsappNumberInput.value = savedNumber;
+            }
+
+            // Update save indicator
+            updateSaveIndicator();
+        }
+
+        // Auto-save Setup
+        function setupAutoSave() {
+            // Auto-save every 3 seconds when changes are detected
+            let hasChanges = false;
+            
+            // Listen for changes
+            document.addEventListener('input', function() {
+                hasChanges = true;
+            });
+            
+            // Auto-save interval
+            AppState.autoSaveInterval = setInterval(function() {
+                if (hasChanges) {
+                    saveData();
+                    hasChanges = false;
+                    showSaveIndicator();
+                }
+            }, 3000); // Save every 3 seconds
+            
+            // Also save on page unload
+            window.addEventListener('beforeunload', function() {
+                saveData();
+            });
+        }
+
+        // Save Indicator
+        function showSaveIndicator() {
+            saveIndicator.classList.add('saving');
+            setTimeout(() => {
+                saveIndicator.classList.remove('saving');
+            }, 1000);
+            
+            // Update timestamp
+            AppState.lastSaveTime = new Date();
+            updateSaveIndicator();
+        }
+
+        function updateSaveIndicator() {
+            if (AppState.lastSaveTime) {
+                const time = AppState.lastSaveTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                saveIndicator.innerHTML = `<i class="fas fa-check-circle" style="color: var(--secondary);"></i>
+                                          <span>Auto-saved at ${time}</span>`;
+            }
+        }
+
+        // Data Management
+        function loadData() {
+            try {
+                const savedData = localStorage.getItem('family_finance_data');
+                if (savedData) {
+                    const data = JSON.parse(savedData);
+                    AppState.income = data.income || [];
+                    AppState.expenses = data.expenses || [];
+                    
+                    // Filter for last 30 days
+                    filterLast30Days();
+                    
+                    renderIncomeTable();
+                    renderExpenseTable();
+                    updateDashboard();
+                    
+                    console.log('Data loaded successfully');
+                }
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+
+        function saveData() {
+            try {
+                const data = {
+                    income: AppState.income,
+                    expenses: AppState.expenses,
+                    lastUpdated: new Date().toISOString()
+                };
+                
+                localStorage.setItem('family_finance_data', JSON.stringify(data));
+                AppState.lastSaveTime = new Date();
+                updateSaveIndicator();
+                
+                console.log('Data saved automatically');
+            } catch (error) {
+                console.error('Error saving data:', error);
+            }
+        }
+
+        function manualSave() {
+            saveData();
+            
+            // Show confirmation
+            const btn = document.querySelector('.btn-save');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Saved!';
+            btn.style.background = 'var(--secondary)';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.style.background = '';
+            }, 1500);
+        }
+
+        function filterLast30Days() {
+            const thirtyDaysAgo = new Date();
+            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+            AppState.income = AppState.income.filter(item => {
+                const itemDate = new Date(item.date);
+                return itemDate >= thirtyDaysAgo;
+            });
+
+            AppState.expenses = AppState.expenses.filter(item => {
+                const itemDate = new Date(item.date);
+                return itemDate >= thirtyDaysAgo;
+            });
+        }
+
+        // Dashboard Functions
+        function updateDashboard() {
+            let totalIncome = 0;
+            let totalExpenses = 0;
+
+            AppState.income.forEach(item => {
+                totalIncome += parseFloat(item.amount);
+            });
+
+            AppState.expenses.forEach(item => {
+                totalExpenses += parseFloat(item.amount);
+            });
+
+            const netBalance = totalIncome - totalExpenses;
+
+            document.getElementById('totalIncome').textContent = `$${totalIncome.toFixed(2)}`;
+            document.getElementById('totalExpenses').textContent = `$${totalExpenses.toFixed(2)}`;
+            document.getElementById('netBalance').textContent = `$${netBalance.toFixed(2)}`;
+
+            // Update colors
+            const balanceElement = document.getElementById('netBalance');
+            if (netBalance >= 0) {
+                balanceElement.style.color = 'var(--secondary)';
+            } else {
+                balanceElement.style.color = 'var(--danger)';
+            }
+        }
+
+        // Income Management
+        function toggleIncomeForm() {
+            const form = document.getElementById('incomeForm');
+            form.classList.toggle('active');
+            
+            if (!form.classList.contains('active')) {
+                resetIncomeForm();
+                AppState.editingId = null;
+            }
+        }
+
+        function resetIncomeForm() {
+            document.getElementById('incomeDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('incomeDescription').value = '';
+            document.getElementById('incomeAmount').value = '';
+            document.getElementById('incomeCategory').value = 'Salary';
+        }
+
+        function saveIncome() {
+            const date = document.getElementById('incomeDate').value;
+            const description = document.getElementById('incomeDescription').value.trim();
+            const category = document.getElementById('incomeCategory').value;
+            const amount = document.getElementById('incomeAmount').value;
+
+            if (!date || !description || !amount || parseFloat(amount) <= 0) {
+                alert('Please fill in all fields with valid data');
+                return;
+            }
+
+            const incomeItem = {
+                id: AppState.editingId || Date.now(),
+                date,
+                description,
+                category,
+                amount: parseFloat(amount).toFixed(2),
+                createdAt: new Date().toISOString()
+            };
+
+            if (AppState.editingId) {
+                // Update existing
+                const index = AppState.income.findIndex(item => item.id === AppState.editingId);
+                if (index !== -1) {
+                    AppState.income[index] = incomeItem;
+                }
+            } else {
+                // Add new
+                AppState.income.push(incomeItem);
+            }
+
+            filterLast30Days();
+            renderIncomeTable();
+            updateDashboard();
+            saveData();
+            toggleIncomeForm();
+        }
+
+        function renderIncomeTable() {
+            const tbody = document.getElementById('incomeTableBody');
+            const emptyState = document.getElementById('incomeEmptyState');
+            
+            if (AppState.income.length === 0) {
+                tbody.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            
+            // Sort by date (newest first)
+            const sortedIncome = [...AppState.income].sort((a, b) => 
+                new Date(b.date) - new Date(a.date)
+            );
+
+            tbody.innerHTML = sortedIncome.map(item => `
+                <tr>
+                    <td>${formatDate(item.date)}</td>
+                    <td>${item.description}</td>
+                    <td><span class="category-badge">${item.category}</span></td>
+                    <td style="color: var(--secondary); font-weight: 600;">+$${parseFloat(item.amount).toFixed(2)}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="icon-btn" onclick="editIncome(${item.id})" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="icon-btn" onclick="deleteIncome(${item.id})" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function editIncome(id) {
+            const incomeItem = AppState.income.find(item => item.id === id);
+            if (incomeItem) {
+                document.getElementById('incomeDate').value = incomeItem.date;
+                document.getElementById('incomeDescription').value = incomeItem.description;
+                document.getElementById('incomeCategory').value = incomeItem.category;
+                document.getElementById('incomeAmount').value = incomeItem.amount;
+                
+                AppState.editingId = id;
+                AppState.editingType = 'income';
+                
+                // Show form if hidden
+                document.getElementById('incomeForm').classList.add('active');
+            }
+        }
+
+        function deleteIncome(id) {
+            if (confirm('Delete this income record?')) {
+                AppState.income = AppState.income.filter(item => item.id !== id);
+                renderIncomeTable();
+                updateDashboard();
+                saveData();
+            }
+        }
+
+        // Expense Management
+        function toggleExpenseForm() {
+            const form = document.getElementById('expenseForm');
+            form.classList.toggle('active');
+            
+            if (!form.classList.contains('active')) {
+                resetExpenseForm();
+                AppState.editingId = null;
+            }
+        }
+
+        function resetExpenseForm() {
+            document.getElementById('expenseDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('expenseDescription').value = '';
+            document.getElementById('expenseAmount').value = '';
+            document.getElementById('expenseCategory').value = 'Groceries';
+        }
+
+        function saveExpense() {
+            const date = document.getElementById('expenseDate').value;
+            const description = document.getElementById('expenseDescription').value.trim();
+            const category = document.getElementById('expenseCategory').value;
+            const amount = document.getElementById('expenseAmount').value;
+
+            if (!date || !description || !amount || parseFloat(amount) <= 0) {
+                alert('Please fill in all fields with valid data');
+                return;
+            }
+
+            const expenseItem = {
+                id: AppState.editingId || Date.now(),
+                date,
+                description,
+                category,
+                amount: parseFloat(amount).toFixed(2),
+                createdAt: new Date().toISOString()
+            };
+
+            if (AppState.editingId) {
+                // Update existing
+                const index = AppState.expenses.findIndex(item => item.id === AppState.editingId);
+                if (index !== -1) {
+                    AppState.expenses[index] = expenseItem;
+                }
+            } else {
+                // Add new
+                AppState.expenses.push(expenseItem);
+            }
+
+            filterLast30Days();
+            renderExpenseTable();
+            updateDashboard();
+            saveData();
+            toggleExpenseForm();
+        }
+
+        function renderExpenseTable() {
+            const tbody = document.getElementById('expenseTableBody');
+            const emptyState = document.getElementById('expenseEmptyState');
+            
+            if (AppState.expenses.length === 0) {
+                tbody.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            
+            // Sort by date (newest first)
+            const sortedExpenses = [...AppState.expenses].sort((a, b) => 
+                new Date(b.date) - new Date(a.date)
+            );
+
+            tbody.innerHTML = sortedExpenses.map(item => `
+                <tr>
+                    <td>${formatDate(item.date)}</td>
+                    <td>${item.description}</td>
+                    <td><span class="category-badge">${item.category}</span></td>
+                    <td style="color: var(--danger); font-weight: 600;">-$${parseFloat(item.amount).toFixed(2)}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="icon-btn" onclick="editExpense(${item.id})" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="icon-btn" onclick="deleteExpense(${item.id})" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function editExpense(id) {
+            const expenseItem = AppState.expenses.find(item => item.id === id);
+            if (expenseItem) {
+                document.getElementById('expenseDate').value = expenseItem.date;
+                document.getElementById('expenseDescription').value = expenseItem.description;
+                document.getElementById('expenseCategory').value = expenseItem.category;
+                document.getElementById('expenseAmount').value = expenseItem.amount;
+                
+                AppState.editingId = id;
+                AppState.editingType = 'expense';
+                
+                // Show form if hidden
+                document.getElementById('expenseForm').classList.add('active');
+            }
+        }
+
+        function deleteExpense(id) {
+            if (confirm('Delete this expense record?')) {
+                AppState.expenses = AppState.expenses.filter(item => item.id !== id);
+                renderExpenseTable();
+                updateDashboard();
+                saveData();
+            }
+        }
+
+        // Quick Expense Buttons
+        function addQuickExpense(category, amount) {
+            const today = new Date().toISOString().split('T')[0];
+            
+            const expenseItem = {
+                id: Date.now(),
+                date: today,
+                description: `Daily ${category}`,
+                category: category,
+                amount: amount.toFixed(2),
+                createdAt: new Date().toISOString()
+            };
+
+            AppState.expenses.push(expenseItem);
+            
+            filterLast30Days();
+            renderExpenseTable();
+            updateDashboard();
+            saveData();
+            
+            // Show confirmation
+            alert(`Added $${amount} for ${category}`);
+        }
+
+        // WhatsApp Sharing
+        function sendDailyUpdate() {
+            const number = whatsappNumberInput.value.trim();
+            
+            if (!number || number.length < 4) {
+                alert('Please enter a valid WhatsApp number');
+                return;
+            }
+
+            // Save number for future use
+            AppState.whatsappNumber = number;
+            localStorage.setItem('family_finance_whatsapp', number);
+
+            // Get today's expenses
+            const today = new Date().toISOString().split('T')[0];
+            const todayExpenses = AppState.expenses.filter(item => item.date === today);
+            
+            let totalToday = 0;
+            let expenseList = '';
+            
+            todayExpenses.forEach(expense => {
+                totalToday += parseFloat(expense.amount);
+                expenseList += `• ${expense.description}: $${parseFloat(expense.amount).toFixed(2)}\n`;
+            });
+
+            // Create message
+            const message = `💰 Daily Expense Update:\n\n` +
+                           `Today's Expenses (${formatDate(today)}):\n` +
+                           (expenseList || 'No expenses today\n') +
+                           `\nTotal today: $${totalToday.toFixed(2)}\n` +
+                           `Monthly total: $${document.getElementById('totalExpenses').textContent.replace('$', '')}`;
+
+            // Encode for WhatsApp URL
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${number.replace(/\D/g, '')}?text=${encodedMessage}`;
+
+            // Open WhatsApp
+            window.open(whatsappUrl, '_blank');
+            
+            // Show confirmation
+            alert(`Opening WhatsApp to share today's expenses ($${totalToday.toFixed(2)})`);
+        }
+
+        // Control Panel Functions
+        function startNewCycle() {
+            if (confirm('Start a new 30-day cycle? Current data will be archived.')) {
+                // Archive old data
+                const archiveData = {
+                    income: AppState.income,
+                    expenses: AppState.expenses,
+                    archivedDate: new Date().toISOString()
+                };
+
+                let archives = JSON.parse(localStorage.getItem('family_finance_archives') || '[]');
+                archives.push(archiveData);
+                localStorage.setItem('family_finance_archives', JSON.stringify(archives));
+
+                // Clear current data
+                AppState.income = [];
+                AppState.expenses = [];
+
+                updateDashboard();
+                renderIncomeTable();
+                renderExpenseTable();
+                saveData();
+
+                alert('New 30-day cycle started! Previous data archived.');
+            }
+        }
+
+        function exportData() {
+            const data = {
+                income: AppState.income,
+                expenses: AppState.expenses,
+                summary: {
+                    totalIncome: document.getElementById('totalIncome').textContent,
+                    totalExpenses: document.getElementById('totalExpenses').textContent,
+                    netBalance: document.getElementById('netBalance').textContent,
+                    exportDate: new Date().toISOString()
+                }
+            };
+
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+            const exportFileName = `family-finance-${new Date().toISOString().split('T')[0]}.json`;
+
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileName);
+            linkElement.click();
+        }
+
+        // Utility Functions
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+    </script>
+</body>
+</html>
