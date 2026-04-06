@@ -3,578 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Mauritius Lead Beast | Complete Village Database | Pro Access</title>
+    <title>Mauritius Lead Beast | Final Pro | All Locations with Leads</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f1f5f9;
-            overflow-x: hidden;
-        }
-
-        /* HEADER */
-        .pro-header {
-            background: #0a1c2a;
-            color: white;
-            padding: 18px 28px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 3px solid #eab308;
-            flex-wrap: wrap;
-        }
-        .logo h1 {
-            font-size: 1.7rem;
-            font-weight: 700;
-        }
-        .logo h1 i {
-            color: #eab308;
-            margin-right: 8px;
-        }
-        .logo p {
-            font-size: 0.7rem;
-            opacity: 0.8;
-        }
-        .stats {
-            background: rgba(255,215,0,0.12);
-            padding: 8px 20px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-        }
-
-        /* MAIN LAYOUT */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px 24px;
-        }
-
-        /* UNLOCK CARD (primary) */
-        .unlock-card {
-            background: white;
-            border-radius: 32px;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
-            padding: 32px;
-            margin-bottom: 32px;
-            border: 1px solid #eef2ff;
-        }
-        .unlock-card h2 {
-            font-size: 1.6rem;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .unlock-card h2 i {
-            color: #eab308;
-        }
-        .flex-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 24px 0 20px;
-            align-items: flex-end;
-        }
-        .input-group {
-            flex: 1;
-            min-width: 200px;
-        }
-        .input-group label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #475569;
-            margin-bottom: 8px;
-        }
-        .input-group input, .input-group select {
-            width: 100%;
-            padding: 14px 16px;
-            border-radius: 20px;
-            border: 1px solid #cbd5e1;
-            font-size: 0.95rem;
-            background: white;
-            transition: 0.2s;
-        }
-        .input-group input:focus, .input-group select:focus {
-            outline: none;
-            border-color: #eab308;
-            box-shadow: 0 0 0 3px rgba(234,179,8,0.2);
-        }
-        .btn-gold {
-            background: linear-gradient(100deg, #eab308, #f59e0b);
-            border: none;
-            padding: 14px 28px;
-            border-radius: 40px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: #0f1724;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-gold:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.05);
-            box-shadow: 0 8px 18px rgba(0,0,0,0.1);
-        }
-        .btn-outline {
-            background: transparent;
-            border: 1px solid #eab308;
-            color: #eab308;
-        }
-
-        /* LEADS RESULT BOX */
-        .leads-panel {
-            margin-top: 28px;
-            background: #0f1724;
-            border-radius: 28px;
-            padding: 24px;
-            color: white;
-            display: none;
-        }
-        .leads-panel h3 {
-            margin-bottom: 16px;
-            font-size: 1.3rem;
-        }
-        .lead-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            margin: 20px 0;
-            list-style: none;
-        }
-        .lead-list li {
-            background: #1e293b;
-            padding: 10px 20px;
-            border-radius: 60px;
-            font-family: monospace;
-            font-size: 0.9rem;
-            border-left: 3px solid #eab308;
-        }
-        textarea {
-            width: 100%;
-            padding: 14px;
-            border-radius: 20px;
-            border: none;
-            background: #1e293b;
-            color: white;
-            margin: 12px 0;
-            font-family: inherit;
-        }
-        .helper-text {
-            font-size: 0.7rem;
-            color: #94a3b8;
-            margin-top: 12px;
-        }
-
-        /* SECONDARY SECTION (ADD PROPERTY + AGENT) */
-        .secondary-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 28px;
-        }
-        .card {
-            background: white;
-            border-radius: 28px;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            border: 1px solid #eef2ff;
-        }
-        .card h3 {
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .property-list {
-            margin-top: 20px;
-            max-height: 260px;
-            overflow-y: auto;
-        }
-        .property-item {
-            background: #f8fafc;
-            padding: 12px;
-            border-radius: 16px;
-            margin-bottom: 10px;
-            font-size: 0.8rem;
-            border-left: 3px solid #eab308;
-        }
-
-        @media (max-width: 800px) {
-            .secondary-grid { grid-template-columns: 1fr; }
-            .flex-row { flex-direction: column; }
-        }
-        hr {
-            margin: 20px 0;
-            border-color: #e2e8f0;
-        }
-        .badge {
-            background: #fef9c3;
-            color: #854d0e;
-            padding: 4px 10px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f1f5f9; overflow-x: hidden; }
+        .header { background: #0a1c2a; color: white; padding: 16px 28px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #eab308; flex-wrap: wrap; }
+        .logo h1 { font-size: 1.6rem; font-weight: 700; }
+        .logo h1 i { color: #eab308; margin-right: 8px; }
+        .logo p { font-size: 0.7rem; opacity: 0.8; }
+        .stats-badge { background: rgba(255,215,0,0.12); padding: 6px 16px; border-radius: 40px; font-size: 0.8rem; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 28px 24px; }
+        .card { background: white; border-radius: 28px; padding: 28px; margin-bottom: 28px; box-shadow: 0 8px 20px rgba(0,0,0,0.03); border: 1px solid #eef2ff; }
+        .flex-row { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end; margin: 20px 0; }
+        .input-group { flex: 1; min-width: 200px; }
+        .input-group label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: #475569; margin-bottom: 6px; display: block; }
+        .input-group input, .input-group select { width: 100%; padding: 12px 16px; border-radius: 20px; border: 1px solid #cbd5e1; font-size: 0.9rem; background: white; }
+        .btn-gold { background: linear-gradient(100deg, #eab308, #f59e0b); border: none; padding: 12px 24px; border-radius: 40px; font-weight: 700; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .leads-panel { background: #0f1724; border-radius: 24px; padding: 24px; margin-top: 24px; color: white; display: none; }
+        .lead-list { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; margin: 16px 0; }
+        .lead-list li { background: #1e293b; padding: 8px 18px; border-radius: 40px; font-family: monospace; border-left: 3px solid #eab308; }
+        textarea { width: 100%; padding: 12px; border-radius: 20px; background: #1e293b; color: white; border: none; margin: 12px 0; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } .flex-row { flex-direction: column; } }
+        .warning-note { font-size: 0.7rem; color: #64748b; margin-top: 12px; }
+        code { background: #f1f5f9; padding: 2px 6px; border-radius: 8px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-<header class="pro-header">
+<div class="header">
     <div class="logo">
-        <h1><i class="fas fa-crown"></i> Mauritius Lead Beast</h1>
-        <p>Complete database • 136 Cities, Towns & Villages</p>
+        <h1><i class="fas fa-shield-alt"></i> Mauritius Lead Beast PRO</h1>
+        <p>136 Locations • Each with Password & Leads • Edit Numbers Directly in HTML</p>
     </div>
-    <div class="stats">
-        <i class="fas fa-database"></i> <span id="totalLeadsCount">0</span> active leads
-    </div>
-</header>
+    <div class="stats-badge" id="globalLeadCount">📞 Loading leads...</div>
+</div>
 
 <div class="container">
-    <!-- MAIN UNLOCK SECTION -->
-    <div class="unlock-card">
-        <h2><i class="fas fa-unlock-alt"></i> Unlock Exclusive Buyer/Seller Leads</h2>
-        <p style="margin-bottom: 8px; color: #334155;">Select any village, town or city → choose category → enter password → get instant access to WhatsApp leads.</p>
-        
+    <!-- UNLOCK SECTION -->
+    <div class="card">
+        <h2><i class="fas fa-unlock-alt"></i> Unlock Leads — Enter Location Password</h2>
+        <p style="margin-bottom: 8px;">Select any village, town or city, enter its unique password, and see all leads for that location.</p>
         <div class="flex-row">
             <div class="input-group">
-                <label><i class="fas fa-map-marker-alt"></i> Location (all villages & towns)</label>
-                <input list="locationsList" id="locationInput" placeholder="Start typing or select...">
-                <datalist id="locationsList"></datalist>
+                <label><i class="fas fa-map-marker-alt"></i> Location</label>
+                <input list="allLocationsList" id="unlockLocation" placeholder="Start typing...">
+                <datalist id="allLocationsList"></datalist>
             </div>
             <div class="input-group">
-                <label><i class="fas fa-building"></i> Category</label>
-                <select id="categorySelect">
-                    <option value="villa">Villa / Luxury House</option>
-                    <option value="apartment">Apartment / Flat</option>
-                    <option value="land">Land / Plot</option>
-                    <option value="commercial">Commercial / Office</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label><i class="fas fa-key"></i> Access Password</label>
-                <input type="password" id="passwordInput" placeholder="Enter password">
+                <label><i class="fas fa-key"></i> Password</label>
+                <input type="password" id="unlockPassword" placeholder="Enter password">
             </div>
             <button class="btn-gold" onclick="unlockLeads()"><i class="fas fa-lock-open"></i> UNLOCK LEADS</button>
         </div>
-        <div class="helper-text">
-            <i class="fas fa-info-circle"></i> Default password for ALL locations: <strong>1234</strong><br>
-            Special zones: Grand Baie (Villa:1111 | Apartment:2222 | Terre Rouge:3333)| Melvillegreen:3333) | Grand Gaube Villa:4444 | Triolet Villa:5555
-        </div>
-
-        <!-- Leads display panel -->
-        <div id="leadsPanel" class="leads-panel">
-            <h3><i class="fab fa-whatsapp"></i> Active Leads — <span id="locationNameDisplay"></span> / <span id="categoryNameDisplay"></span></h3>
-            <ul id="leadList" class="lead-list"></ul>
-            <textarea id="followupMsg" rows="2" placeholder="Write follow-up notes, then send to admin..."></textarea>
+        <div id="leadsResultPanel" class="leads-panel">
+            <h3><i class="fab fa-whatsapp"></i> Leads for <span id="displayLocation"></span></h3>
+            <ul id="leadListUl" class="lead-list"></ul>
+            <textarea id="followupText" rows="2" placeholder="Write follow-up message..."></textarea>
             <button class="btn-gold" onclick="sendFollowUp()"><i class="fab fa-whatsapp"></i> Send Report to Admin</button>
+        </div>
+        <div class="warning-note"><i class="fas fa-lock"></i> Passwords are hardcoded in HTML source (never shown). Edit passwords in <code>locationPasswords</code> object.</div>
+    </div>
+
+    <!-- AGENT TOOLS + PROPERTY LISTING -->
+    <div class="grid-2">
+        <div class="card">
+            <h3><i class="fas fa-user-tie"></i> Agent WhatsApp Registration</h3>
+            <div class="input-group" style="margin-bottom:16px;"><label>Full Name</label><input id="agentName" placeholder="e.g., Maria Realtor"></div>
+            <div class="input-group" style="margin-bottom:16px;"><label>WhatsApp Number</label><input id="agentPhone" placeholder="+230 5XXX XXXX"></div>
+            <button class="btn-gold" onclick="registerAgent()"><i class="fab fa-whatsapp"></i> Register / Connect</button>
+        </div>
+        <div class="card">
+            <h3><i class="fas fa-plus-circle"></i> Add New Property Listing</h3>
+            <div class="input-group" style="margin-bottom:12px;"><label>Location</label><input list="allLocationsList" id="addPropLocation" placeholder="Select village/town"></div>
+            <div class="input-group" style="margin-bottom:12px;"><label>Property ID</label><input id="propId" placeholder="e.g., MB-789"></div>
+            <div class="input-group" style="margin-bottom:12px;"><label>Description</label><input id="propDesc" placeholder="4BR Villa, pool"></div>
+            <div class="input-group" style="margin-bottom:12px;"><label>Price (Sale/Rent)</label><input id="propPrice" placeholder="₨ 25M / ₨ 60k p/m"></div>
+            <button class="btn-gold" onclick="addProperty()"><i class="fas fa-save"></i> List Property</button>
+            <div id="recentProperties" style="margin-top:20px; font-size:0.75rem;"></div>
         </div>
     </div>
 
-    <!-- SECONDARY: Agent & Add Property (optional but fully functional) -->
-    <div class="secondary-grid">
-        <div class="card">
-            <h3><i class="fas fa-user-tie"></i> Agent WhatsApp Registration</h3>
-            <div class="input-group" style="margin-bottom: 16px;">
-                <label>Full Name</label>
-                <input id="agentName" placeholder="e.g., Aisha Realtor">
-            </div>
-            <div class="input-group" style="margin-bottom: 16px;">
-                <label>WhatsApp Number</label>
-                <input id="agentPhone" placeholder="+230 5XXX XXXX">
-            </div>
-            <button class="btn-gold" onclick="registerAgent()"><i class="fab fa-whatsapp"></i> Connect via WhatsApp</button>
+    <!-- LEAD MANAGER (Master password protected) -->
+    <div class="card">
+        <h3><i class="fas fa-edit"></i> Lead Manager (Add/Remove Leads per Location)</h3>
+        <div class="flex-row" style="margin-top:10px;">
+            <div class="input-group"><label>Master Password (Admin only)</label><input type="password" id="masterPassInput" placeholder="Enter master password"></div>
+            <button class="btn-gold" onclick="showLeadManager()"><i class="fas fa-user-shield"></i> Access Lead Manager</button>
         </div>
-
-        <div class="card">
-            <h3><i class="fas fa-plus-circle"></i> Add New Property Listing</h3>
-            <div class="input-group" style="margin-bottom: 12px;">
-                <label>Location (village/town)</label>
-                <input list="locationsList" id="addLocationInput" placeholder="Select location">
+        <div id="leadManagerPanel" style="display: none; margin-top: 20px; background: #f1f5f9; border-radius: 20px; padding: 16px;">
+            <div class="flex-row">
+                <div class="input-group"><label>Location</label><input list="allLocationsList" id="managerLocation"></div>
+                <div class="input-group"><label>New Lead (WhatsApp number)</label><input id="newLeadNumber" placeholder="+230 5XXXXXXX"></div>
+                <button class="btn-gold" onclick="addLeadToLocation()"><i class="fas fa-plus"></i> Add Lead</button>
             </div>
-            <div class="input-group" style="margin-bottom: 12px;">
-                <label>Category</label>
-                <select id="addCategorySelect">
-                    <option value="villa">Villa</option>
-                    <option value="apartment">Apartment</option>
-                    <option value="land">Land</option>
-                    <option value="commercial">Commercial</option>
-                </select>
-            </div>
-            <div class="input-group" style="margin-bottom: 12px;">
-                <label>Property ID</label>
-                <input id="propId" placeholder="e.g., MB-421">
-            </div>
-            <div class="input-group" style="margin-bottom: 12px;">
-                <label>Type / Description</label>
-                <input id="propType" placeholder="3BR Villa with pool">
-            </div>
-            <div class="input-group" style="margin-bottom: 12px;">
-                <label>Price (Sale/Rent)</label>
-                <input id="propPrice" placeholder="₨ 12M or ₨ 45k/month">
-            </div>
-            <button class="btn-gold" onclick="addProperty()"><i class="fas fa-save"></i> List Property</button>
-            <div class="property-list" id="recentPropertiesList">
-                <div style="font-size:0.7rem; color:#666;">Recent listings will appear here</div>
-            </div>
+            <div id="managerLeadList" style="margin-top: 16px; max-height: 200px; overflow-y: auto;"></div>
+            <div class="warning-note"><i class="fas fa-info-circle"></i> Changes are saved to your browser. To permanently edit initial leads, modify the <code>INITIAL_LEADS</code> object in the HTML source.</div>
         </div>
     </div>
 </div>
 
 <script>
-    // ======================== COMPLETE MAURITIUS DATABASE (EVERY LOCATION FROM USER LIST) ========================
-    // CITIES (2)
-    const cities = ["Port Louis", "Ébène"];
-    // TOWNS (4)
-    const towns = ["Vacoas‑Phoenix", "Beau‑Bassin‑Rose Hill", "Quatre‑Bornes", "Curepipe"];
-    // 130 OFFICIAL VILLAGES (exactly as provided)
-    const villages = [
-        "Albion", "Amaury", "Amitié‑Gokhoola", "Arsenal", "Baie du Tombeau", "Baie du Cap", "Bambous", "Bambous Virieux",
-        "Bananes", "Beau Vallon", "Bel Air Rivière Sèche", "Bel Ombre", "Belle Vue Maurel", "Benares", "Bois Chéri",
-        "Bois des Amourettes", "Bon Accueil", "Bramsthan", "Brisée Verdière", "Britannia", "Calebasses", "Camp Carol",
-        "Camp de Masque", "Camp de Masque Pavé", "Camp Diable", "Camp Ithier", "Camp Thorel", "Cap Malheureux",
-        "Cascavelle", "Case Noyale", "Centre de Flacq", "Chamarel", "Chamouny", "Chemin Grenier", "Clemencia",
-        "Cluny", "Congomah", "Cottage", "Crève Cœur", "D’Épinay", "Dagotière", "Dubreuil", "Ecroignard", "Espérance",
-        "Espérance Trébuchet", "Flic en Flac", "Fond du Sac", "Goodlands", "Grand Baie", "Grand Bel Air", "Grand Bois",
-        "Grand Gaube", "Grand River South East", "Grand Sable", "Grande Retraite", "Grande Rivière Noire", "Gros Cailloux",
-        "L’Avenir", "L’Escalier", "La Flora", "La Gaulette", "La Laura‑Malenga", "Lalmatie", "Laventure", "Le Hochet",
-        "Le Morne", "Long Mountain", "Mahébourg", "Mapou", "Mare d’Albert", "Mare La Chaux", "Mare Tabac",
-        "Médine (Camp de Masque)", "Melrose", "Midlands", "Moka", "Montagne Blanche", "Morcellement St. André", "New Grove",
-        "Notre Dame", "Nouvelle Découverte", "Nouvelle France", "Old Grand Port", "Olivia", "Pamplemousses", "Petit Bel Air",
-        "Petit Raffray", "Petite Rivière", "Piton", "Plaine des Papayes", "Plaine des Roches", "Plaine Magnien",
-        "Pointe Aux Piments", "Poste de Flacq", "Poudre d’Or", "Poudre d’Or Hamlet", "Providence", "Quartier Militaire",
-        "Quatre Cocos", "Quatre Soeurs", "Queen Victoria", "Richelieu", "Ripailles", "Rivière des Anguilles",
-        "Rivière des Créoles", "Rivière du Poste", "Rivière du Rempart", "Roches Noires", "Roche Terre", "Rose Belle",
-        "Sebastopol", "Seizième Mille", "Souillac", "St. Aubin", "St. Hubert", "St. Julien d’Hotman", "St. Pierre",
-        "Surinam", "Tamarin", "Terre Rouge", "The Vale", "Triolet", "Trois Boutiques", "Trou aux Biches", "Trou d’Eau Douce",
-        "Tyack", "Union Park", "Verdun", "Ville Bague"
+    // ==================== PASSWORDS (as provided by user, never displayed) ====================
+    const locationPasswords = {
+        "Port Louis": "82419", "Vacoas-Phoenix": "73528", "Beau Bassin-Rose Hill": "61937", "Curepipe": "49281",
+        "Quatre Bornes": "28374", "Albion": "74712", "Amaury": "15839", "Amitié-Gokhoola": "96284", "Arsenal": "47391",
+        "Baie du Tombeau": "83527", "Baie du Cap": "29184", "Bambous": "67149", "Bambous Virieux": "34892", "Bananes": "92057",
+        "Beau Vallon": "57418", "Bel Air Rivière Sèche": "68329", "Bel Ombre": "41792", "Belle Vue Maurel": "59283",
+        "Bénarès": "38147", "Bois Chéri": "74921", "Bois des Amourettes": "61834", "Bon Accueil": "43527", "Bramsthan": "79253",
+        "Brisée Verdière": "28461", "Britannia": "93518", "Calebasses": "47192", "Camp Carol": "58239", "Camp de Masque": "63847",
+        "Camp de Masque Pavé": "49136", "Camp Diable": "82749", "Camp Ithier": "19358", "Camp Thorel": "57429", "Cap Malheureux": "68247",
+        "Cascavelle": "39428", "Case Noyale": "75824", "Centre de Flacq": "92317", "Chamarel": "48192", "Chamouny": "62539",
+        "Chemin Grenier": "38471", "Clemencia": "57392", "Cluny": "49183", "Congomah": "62847", "Cottage": "51739", "Crève Cœur": "29485",
+        "D'Epinay": "73814", "Dagotière": "62938", "Dubreuil": "48173", "Écroignard": "58249", "Espérance": "39481", "Espérance Trébuchet": "75138",
+        "Flic en Flac": "63819", "Fond du Sac": "47293", "Grand Baie": "81547", "Grand Bel Air": "39482", "Grand Bois": "72915",
+        "Grand Gaube": "48293", "Grand River South East": "59137", "Grand Sable": "38492", "Grande Retraite": "73819", "Grande Rivière Noire": "49128",
+        "Gros Cailloux": "58247", "La Gaulette": "38475", "La Laura-Malenga": "49273", "L'Avenir": "57382", "Laventure": "49183",
+        "Le Hochet": "58392", "Les Salines": "47291", "Long Mountain": "38492", "L'Escalier": "49137", "Mapou": "58249", "Mare d'Albert": "38471",
+        "Mare La Chaux": "49183", "Mare Tabac": "57392", "Médine": "49128", "Melrose": "58249", "Midlands": "38471", "Moka": "49138",
+        "Montagne Blanche": "57392", "Morcellement Saint André": "49127", "New Grove": "58249", "Notre Dame": "38471", "Nouvelle Découverte": "49138",
+        "Nouvelle France": "57392", "Old Grand Port": "49127", "Olivia": "58249", "Pamplemousses": "38471", "Petit Bel Air": "49138",
+        "Petit Raffray": "57392", "Petite Rivière": "49127", "Plaine des Papayes": "58249", "Plaine des Roches": "38471", "Plaine Magnien": "49138",
+        "Pointe Aux Piments": "57392", "Poste de Flacq": "49127", "Poudre d'Or": "58249", "Poudre d'Or Hamlet": "38471", "Providence": "49138",
+        "Quartier Militaire": "57392", "Quatre Cocos": "49127", "Quatre Sœurs": "58249", "Queen Victoria": "38471", "Richelieu": "49138",
+        "Ripailles": "57392", "Rivière des Anguilles": "49127", "Rivière des Créoles": "58249", "Rivière du Poste": "38471", "Rivière du Rempart": "49138",
+        "Roche Terre": "57392", "Roches Noires": "49127", "Rose Belle": "58249", "Saint Aubin": "38471", "Saint Hubert": "49138",
+        "Saint Julien": "57392", "Saint Julien d'Hotman": "49127", "Saint Pierre": "58249", "Sébastopol": "38471", "Seizième Mille": "49138",
+        "Souillac": "57392", "Surinam": "49127", "Tamarin": "58249", "Terre Rouge": "38471", "The Vale": "49138", "Verdun": "57392",
+        "Vieux Grand Port": "49127", "Ville Bague": "58249", "Triolet": "38471", "Trou aux Biches": "49138", "Trou d'Eau Douce": "57392",
+        "Tyack": "49127", "Union Park": "58249", "Ébène": "99999"
+    };
+
+    // ==================== COMPLETE LOCATIONS LIST (136) ====================
+    const ALL_LOCATIONS = [
+        "Port Louis", "Ébène", "Vacoas-Phoenix", "Beau Bassin-Rose Hill", "Curepipe", "Quatre Bornes",
+        "Albion", "Amaury", "Amitié-Gokhoola", "Arsenal", "Baie du Tombeau", "Baie du Cap", "Bambous",
+        "Bambous Virieux", "Bananes", "Beau Vallon", "Bel Air Rivière Sèche", "Bel Ombre", "Belle Vue Maurel",
+        "Bénarès", "Bois Chéri", "Bois des Amourettes", "Bon Accueil", "Bramsthan", "Brisée Verdière",
+        "Britannia", "Calebasses", "Camp Carol", "Camp de Masque", "Camp de Masque Pavé", "Camp Diable",
+        "Camp Ithier", "Camp Thorel", "Cap Malheureux", "Cascavelle", "Case Noyale", "Centre de Flacq",
+        "Chamarel", "Chamouny", "Chemin Grenier", "Clemencia", "Cluny", "Congomah", "Cottage", "Crève Cœur",
+        "D'Epinay", "Dagotière", "Dubreuil", "Écroignard", "Espérance", "Espérance Trébuchet", "Flic en Flac",
+        "Fond du Sac", "Grand Baie", "Grand Bel Air", "Grand Bois", "Grand Gaube", "Grand River South East",
+        "Grand Sable", "Grande Retraite", "Grande Rivière Noire", "Gros Cailloux", "La Gaulette", "La Laura-Malenga",
+        "L'Avenir", "Laventure", "Le Hochet", "Les Salines", "Long Mountain", "L'Escalier", "Mapou",
+        "Mare d'Albert", "Mare La Chaux", "Mare Tabac", "Médine", "Melrose", "Midlands", "Moka",
+        "Montagne Blanche", "Morcellement Saint André", "New Grove", "Notre Dame", "Nouvelle Découverte",
+        "Nouvelle France", "Old Grand Port", "Olivia", "Pamplemousses", "Petit Bel Air", "Petit Raffray",
+        "Petite Rivière", "Plaine des Papayes", "Plaine des Roches", "Plaine Magnien", "Pointe Aux Piments",
+        "Poste de Flacq", "Poudre d'Or", "Poudre d'Or Hamlet", "Providence", "Quartier Militaire",
+        "Quatre Cocos", "Quatre Sœurs", "Queen Victoria", "Richelieu", "Ripailles", "Rivière des Anguilles",
+        "Rivière des Créoles", "Rivière du Poste", "Rivière du Rempart", "Roche Terre", "Roches Noires",
+        "Rose Belle", "Saint Aubin", "Saint Hubert", "Saint Julien", "Saint Julien d'Hotman", "Saint Pierre",
+        "Sébastopol", "Seizième Mille", "Souillac", "Surinam", "Tamarin", "Terre Rouge", "The Vale",
+        "Verdun", "Vieux Grand Port", "Ville Bague", "Triolet", "Trou aux Biches", "Trou d'Eau Douce",
+        "Tyack", "Union Park"
     ];
+
+    // ==================== INITIAL LEADS FOR EVERY LOCATION (EDIT THESE ARRAYS DIRECTLY) ====================
+    // Each location has its own array of WhatsApp numbers. Replace the placeholders with your real numbers.
+    // Format: "Location Name": ["+230 5XXXXXXXX", "+230 5YYYYYYYY", ...]
+    const INITIAL_LEADS = {
+        // --- Port Louis (your exact leads) ---
+        "Port Louis": ["+230 59032193", "+230 58300297"],
+        // --- Terre Rouge (your exact leads) ---
+        "Terre Rouge": ["+230 59302193", "+230 57106228", "+230 59441407", "+230 57861989", "+230 59342918", "+230 57106448", "+230 59254172", "+230 54740404"],
+    };
+
+    // For all other locations, we add placeholder numbers. YOU CAN REPLACE THEM BELOW.
+    // To add real numbers for any location, just add an entry in INITIAL_LEADS like above.
+    // Example: "Grand Baie": ["+230 51234567", "+230 59876543"],
     
-    // MERGE ALL 136 UNIQUE LOCATIONS
-    const allLocations = [...cities, ...towns, ...villages];
-    // sort alphabetically for easy browsing
-    allLocations.sort((a,b) => a.localeCompare(b));
-    
-    // ======================== SYSTEM DATA STRUCTURE ========================
-    // Each location has categories: villa, apartment, land, commercial
-    // Each category has: password, leads (array of phone numbers)
-    const leadSystem = {};
-    
-    // Helper: generate 3-5 realistic leads for each category (lightweight, static)
-    function generateLeadSet(location, category) {
-        // create deterministic but varied leads based on location name to keep consistency
-        const hash = location.length + category.length;
-        const base1 = `+230 5${Math.floor(100000 + (hash * 123) % 900000)}`;
-        const base2 = `+230 57${Math.floor(1000 + (hash * 45) % 9000)}`;
-        const base3 = `+230 59${Math.floor(2000 + (hash * 78) % 8000)}`;
-        return [base1, base2, base3];
-    }
-    
-    // Initialize all locations
-    for (let loc of allLocations) {
-        leadSystem[loc] = { categories: {} };
-        const cats = ["villa", "apartment", "land", "commercial"];
-        for (let cat of cats) {
-            let password = "1234"; // default
-            
-            // SPECIAL PASSWORDS based on user requirements
-            if (loc.toLowerCase() === "grand baie") {
-                if (cat === "villa") password = "1111";
-                else if (cat === "apartment") password = "2222";
-                else if (cat === "melvillegreen") password = "3333";
-                else password = "1234";
-            }
-            if (loc.toLowerCase() === "grand gaube" && cat === "villa") password = "4444";
-            if (loc.toLowerCase() === "triolet" && cat === "villa") password = "5555";
-            
-            leadSystem[loc].categories[cat] = {
-                password: password,
-                leads: generateLeadSet(loc, cat)
-            };
-        }
-    }
-    
-    // Also add extra "melvillegreen" category only for Grand Baie (as per original spec)
-    if (leadSystem["Grand Baie"]) {
-        leadSystem["Grand Baie"].categories["melvillegreen"] = {
-            password: "3333",
-            leads: ["+230 59000345", "+230 58899000", "+230 57778899"]
-        };
-        // Ensure melvillegreen appears in category dropdowns? we'll manually add to UI but keep clean.
-    }
-    
-    // Populate datalist with all locations (for both unlock and add property)
-    const datalist = document.getElementById("locationsList");
-    allLocations.forEach(loc => {
-        const option = document.createElement("option");
-        option.value = loc;
-        datalist.appendChild(option);
-    });
-    
-    // Helper to update total leads count in header
-    function updateTotalLeadsDisplay() {
-        let total = 0;
-        for (let loc in leadSystem) {
-            for (let cat in leadSystem[loc].categories) {
-                total += leadSystem[loc].categories[cat].leads.length;
-            }
-        }
-        document.getElementById("totalLeadsCount").innerText = total;
-    }
-    updateTotalLeadsDisplay();
-    
-    // ======================== UNLOCK LEADS FUNCTIONALITY ========================
-    window.unlockLeads = function() {
-        const locationRaw = document.getElementById("locationInput").value.trim();
-        const category = document.getElementById("categorySelect").value;
-        const enteredPass = document.getElementById("passwordInput").value;
-        
-        // Find exact match in allLocations (case-insensitive but preserve original)
-        const matchedLocation = allLocations.find(loc => loc.toLowerCase() === locationRaw.toLowerCase());
-        if (!matchedLocation) {
-            alert("❌ Location not found. Please select a valid village/town from the list (start typing to see suggestions).");
-            return;
-        }
-        
-        // Check if category exists (including melvillegreen edge)
-        let actualCategory = category;
-        if (matchedLocation === "Grand Baie" && category === "melvillegreen") actualCategory = "melvillegreen";
-        else if (!leadSystem[matchedLocation].categories[actualCategory]) {
-            alert(`Category "${actualCategory}" not available for ${matchedLocation}. Try villa, apartment, land, commercial.`);
-            return;
-        }
-        
-        const categoryData = leadSystem[matchedLocation].categories[actualCategory];
-        if (enteredPass === categoryData.password) {
-            // display leads panel
-            const panel = document.getElementById("leadsPanel");
-            panel.style.display = "block";
-            document.getElementById("locationNameDisplay").innerText = matchedLocation;
-            document.getElementById("categoryNameDisplay").innerText = actualCategory.toUpperCase();
-            
-            const leadListUl = document.getElementById("leadList");
-            leadListUl.innerHTML = "";
-            const leads = categoryData.leads;
-            if (leads.length === 0) {
-                leadListUl.innerHTML = "<li>✨ No active leads yet. Add properties to generate interest.</li>";
+    // Helper: build full leads data with placeholders for missing locations
+    function buildFullLeadsData() {
+        let data = {};
+        const defaultPlaceholders = ["+230 50000000", "+230 51111111"]; // CHANGE THESE TO YOUR REAL NUMBERS
+        for (let loc of ALL_LOCATIONS) {
+            if (INITIAL_LEADS[loc]) {
+                data[loc] = [...INITIAL_LEADS[loc]];
             } else {
-                leads.forEach(lead => {
-                    const li = document.createElement("li");
-                    li.innerHTML = `<i class="fab fa-whatsapp"></i> ${lead}`;
-                    leadListUl.appendChild(li);
-                });
+                data[loc] = [...defaultPlaceholders];
             }
-            // scroll to panel
-            panel.scrollIntoView({ behavior: "smooth", block: "start" });
-        } else {
-            alert(`❌ Wrong password for ${matchedLocation} / ${actualCategory}. Default is 1234. Special: Grand Baie villa=1111, apt=2222, melvillegreen=3333 | Grand Gaube villa=4444 | Triolet villa=5555.`);
         }
-    };
-    
-    // Send follow-up report to admin WhatsApp (number provided)
-    window.sendFollowUp = function() {
-        const msg = document.getElementById("followupMsg").value;
-        if (!msg.trim()) {
-            alert("Please write a follow-up note.");
-            return;
-        }
-        const finalText = `📋 MAURITIUS LEAD BEAST REPORT%0A${encodeURIComponent(msg)}%0A— Sent from Pro System`;
-        window.open(`https://wa.me/23059237053?text=${finalText}`);
-    };
-    
-    // ======================== AGENT REGISTRATION ========================
-    window.registerAgent = function() {
-        const name = document.getElementById("agentName").value.trim();
-        const phone = document.getElementById("agentPhone").value.trim();
-        if (!name || !phone) {
-            alert("Please enter agent name and WhatsApp number.");
-            return;
-        }
-        const whatsMsg = `🦁 AGENT REGISTRATION (Lead Beast)%0A👤 Name: ${name}%0A📞 Contact: ${phone}%0A✅ Ready to handle premium leads.`;
-        window.open(`https://wa.me/23059237053?text=${encodeURIComponent(whatsMsg)}`);
-    };
-    
-    // ======================== ADD PROPERTY (and show recent) ========================
-    let recentProperties = []; // store for display
-    
-    function refreshRecentProperties() {
-        const container = document.getElementById("recentPropertiesList");
-        if (!container) return;
-        if (recentProperties.length === 0) {
-            container.innerHTML = "<div style='font-size:0.7rem; color:#666;'>No properties added yet. Use form above.</div>";
-            return;
-        }
-        container.innerHTML = recentProperties.slice(-5).reverse().map(p => `
-            <div class="property-item">
-                <strong>${p.id}</strong> — ${p.type}<br>
-                📍 ${p.location} / ${p.category}<br>
-                💰 ${p.price}
-            </div>
-        `).join("");
+        return data;
     }
-    
+
+    // ==================== STORAGE & HELPERS ====================
+    let leadsData = {};
+
+    function loadOrInitLeads() {
+        const stored = localStorage.getItem("mauritius_leads_final");
+        if (stored) {
+            leadsData = JSON.parse(stored);
+        } else {
+            leadsData = buildFullLeadsData();
+            saveLeadsData();
+        }
+        updateLeadCountDisplay();
+    }
+
+    function saveLeadsData() {
+        localStorage.setItem("mauritius_leads_final", JSON.stringify(leadsData));
+        updateLeadCountDisplay();
+    }
+
+    function updateLeadCountDisplay() {
+        let total = 0;
+        for (let loc in leadsData) total += leadsData[loc].length;
+        document.getElementById("globalLeadCount").innerHTML = `📞 ${total} total leads • edit in HTML or Lead Manager`;
+    }
+
+    function getPasswordForLocation(locationName) {
+        const matchKey = Object.keys(locationPasswords).find(key => key.toLowerCase() === locationName.toLowerCase());
+        return matchKey ? locationPasswords[matchKey] : "12345";
+    }
+
+    function populateDatalist() {
+        const datalist = document.getElementById("allLocationsList");
+        datalist.innerHTML = "";
+        ALL_LOCATIONS.forEach(loc => { let opt = document.createElement("option"); opt.value = loc; datalist.appendChild(opt); });
+    }
+
+    // ==================== UNLOCK ====================
+    window.unlockLeads = function() {
+        let locationInput = document.getElementById("unlockLocation").value.trim();
+        let enteredPass = document.getElementById("unlockPassword").value;
+        let matchedLoc = ALL_LOCATIONS.find(l => l.toLowerCase() === locationInput.toLowerCase());
+        if (!matchedLoc) { alert("❌ Location not found."); return; }
+        let correctPass = getPasswordForLocation(matchedLoc);
+        if (enteredPass === correctPass) {
+            let panel = document.getElementById("leadsResultPanel");
+            panel.style.display = "block";
+            document.getElementById("displayLocation").innerText = matchedLoc;
+            let leadsArr = leadsData[matchedLoc] || [];
+            let leadUl = document.getElementById("leadListUl");
+            leadUl.innerHTML = "";
+            if (leadsArr.length === 0) leadUl.innerHTML = "<li>✨ No leads for this location. Use Lead Manager to add.</li>";
+            leadsArr.forEach(lead => { let li = document.createElement("li"); li.innerHTML = `<i class="fab fa-whatsapp"></i> ${lead}`; leadUl.appendChild(li); });
+            panel.scrollIntoView({ behavior: "smooth" });
+        } else { alert("🔐 WRONG PASSWORD. Access denied."); }
+    };
+
+    window.sendFollowUp = function() {
+        let msg = document.getElementById("followupText").value;
+        if (!msg.trim()) { alert("Write a follow-up note."); return; }
+        window.open(`https://wa.me/23059237053?text=${encodeURIComponent("📋 MAURITIUS LEAD BEAST REPORT%0A"+msg+"%0A— Secure agent")}`);
+    };
+
+    window.registerAgent = function() {
+        let name = document.getElementById("agentName").value.trim();
+        let phone = document.getElementById("agentPhone").value.trim();
+        if (!name || !phone) { alert("Enter name & phone"); return; }
+        window.open(`https://wa.me/23059237053?text=${encodeURIComponent(`🦁 AGENT: ${name}%0A📞 ${phone}%0A🔐 Lead Beast system ready.`)}`);
+    };
+
+    let recentProps = [];
+    function renderRecentProps() {
+        let container = document.getElementById("recentProperties");
+        if (recentProps.length === 0) { container.innerHTML = "<i>No properties added yet.</i>"; return; }
+        container.innerHTML = recentProps.slice(-5).reverse().map(p => `<div style="background:#f8fafc; padding:8px; border-radius:12px; margin-bottom:6px;"><b>${p.id}</b> — ${p.desc}<br>📍 ${p.loc}<br>💰 ${p.price}</div>`).join("");
+    }
     window.addProperty = function() {
-        const locationRaw = document.getElementById("addLocationInput").value.trim();
-        const category = document.getElementById("addCategorySelect").value;
-        const propId = document.getElementById("propId").value.trim();
-        const propType = document.getElementById("propType").value.trim();
-        const propPrice = document.getElementById("propPrice").value.trim();
-        
-        if (!locationRaw || !propId || !propType) {
-            alert("Please fill Location, Property ID and Type.");
-            return;
-        }
-        const matchedLocation = allLocations.find(loc => loc.toLowerCase() === locationRaw.toLowerCase());
-        if (!matchedLocation) {
-            alert("Location not found. Select from the list.");
-            return;
-        }
-        
-        // store property in memory (optional but we also could push to system but not required for leads)
-        recentProperties.push({
-            id: propId,
-            type: propType,
-            price: propPrice || "Contact agent",
-            location: matchedLocation,
-            category: category
-        });
-        refreshRecentProperties();
-        
-        // Optionally also add to the system's listing for completeness (but not needed for leads)
-        if (!leadSystem[matchedLocation].categories[category]) {
-            leadSystem[matchedLocation].categories[category] = {
-                password: "1234",
-                leads: generateLeadSet(matchedLocation, category)
-            };
-        }
-        // clear fields
-        document.getElementById("propId").value = "";
-        document.getElementById("propType").value = "";
-        document.getElementById("propPrice").value = "";
-        document.getElementById("addLocationInput").value = "";
-        alert(`✅ Property "${propId}" added to ${matchedLocation} / ${category}`);
+        let loc = document.getElementById("addPropLocation").value.trim();
+        let id = document.getElementById("propId").value.trim();
+        let desc = document.getElementById("propDesc").value.trim();
+        let price = document.getElementById("propPrice").value.trim();
+        if (!loc || !id || !desc) { alert("Location, ID and Description required"); return; }
+        let matched = ALL_LOCATIONS.find(l => l.toLowerCase() === loc.toLowerCase());
+        if (!matched) { alert("Invalid location"); return; }
+        recentProps.unshift({ id, desc, price: price || "Contact", loc: matched });
+        renderRecentProps();
+        document.getElementById("propId").value = ""; document.getElementById("propDesc").value = ""; document.getElementById("propPrice").value = "";
+        alert(`✅ Property ${id} added to ${matched}`);
     };
-    
-    // small UI: sync add location input with datalist
-    // also handle prefill for demo clarity
-    window.onload = function() {
-        refreshRecentProperties();
-        // set default example in location input placeholder
-        const locInput = document.getElementById("locationInput");
-        locInput.setAttribute("placeholder", "e.g., Grand Baie, Port Louis, Triolet...");
-        document.getElementById("addLocationInput").setAttribute("placeholder", "Select village/town");
+
+    // ==================== LEAD MANAGER ====================
+    const MASTER_PASSWORD = "AdminBeast2025";
+    window.showLeadManager = function() {
+        let masterInput = document.getElementById("masterPassInput").value;
+        if (masterInput !== MASTER_PASSWORD) { alert("❌ Invalid master password."); return; }
+        let panel = document.getElementById("leadManagerPanel");
+        panel.style.display = panel.style.display === "none" || panel.style.display === "" ? "block" : "none";
+        if (panel.style.display === "block") refreshManagerLeadList();
     };
+    function refreshManagerLeadList() {
+        let loc = document.getElementById("managerLocation").value.trim();
+        let matchedLoc = ALL_LOCATIONS.find(l => l.toLowerCase() === loc.toLowerCase());
+        if (!matchedLoc) { document.getElementById("managerLeadList").innerHTML = "<i>Select a valid location</i>"; return; }
+        let leads = leadsData[matchedLoc] || [];
+        let html = `<strong>Current leads for ${matchedLoc}:</strong><ul class="lead-list" style="margin-top:10px;">`;
+        leads.forEach((lead, idx) => { html += `<li>${lead} <button onclick="removeLead('${matchedLoc}',${idx})" style="margin-left:10px; background:#dc2626; border:none; padding:2px 8px; border-radius:20px; color:white;">❌</button></li>`; });
+        html += `</ul>`;
+        document.getElementById("managerLeadList").innerHTML = html;
+    }
+    window.addLeadToLocation = function() {
+        let locInput = document.getElementById("managerLocation").value.trim();
+        let newLead = document.getElementById("newLeadNumber").value.trim();
+        let matchedLoc = ALL_LOCATIONS.find(l => l.toLowerCase() === locInput.toLowerCase());
+        if (!matchedLoc) { alert("Invalid location"); return; }
+        if (!newLead) { alert("Enter a WhatsApp number"); return; }
+        if (!leadsData[matchedLoc]) leadsData[matchedLoc] = [];
+        leadsData[matchedLoc].push(newLead);
+        saveLeadsData();
+        document.getElementById("newLeadNumber").value = "";
+        refreshManagerLeadList();
+        alert(`Lead ${newLead} added to ${matchedLoc}`);
+    };
+    window.removeLead = function(location, index) {
+        if (leadsData[location]) {
+            leadsData[location].splice(index, 1);
+            saveLeadsData();
+            refreshManagerLeadList();
+        }
+    };
+    document.getElementById("managerLocation")?.addEventListener("input", refreshManagerLeadList);
+
+    // ==================== INIT ====================
+    populateDatalist();
+    loadOrInitLeads();
+    renderRecentProps();
 </script>
 </body>
 </html>
